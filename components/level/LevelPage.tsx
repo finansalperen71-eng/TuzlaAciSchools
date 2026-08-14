@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { PageHero } from "@/components/ui/PageHero";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { AngleMark } from "@/components/ui/AngleMark";
 import { type LevelContent } from "@/content/levels";
+import { getBreadcrumbTrail, type RoutePath } from "@/content/routes";
 
 const sectionOrder = [
   "philosophy",
@@ -22,18 +23,13 @@ export function LevelPage({ level }: { level: LevelContent }) {
     <>
       <section className="border-b border-line">
         <Container className="flex flex-col gap-6 py-16 md:py-20">
-          <div className="flex items-center gap-2">
-            <AngleMark className="h-5 w-5" />
-            <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
-              {level.ageRange}
-            </span>
-          </div>
-          <h1 className="font-display text-4xl font-semibold text-ink md:text-5xl">
-            {level.title}
-          </h1>
-          <p className="max-w-2xl text-base leading-relaxed text-slate md:text-lg">
-            {level.summary}
-          </p>
+          <PageHero
+            title={level.title}
+            eyebrow={level.ageRange}
+            eyebrowTone="signal"
+            description={level.summary}
+            breadcrumb={getBreadcrumbTrail(`/${level.slug}` as RoutePath)}
+          />
         </Container>
       </section>
 

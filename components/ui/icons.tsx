@@ -2,7 +2,7 @@ type IconProps = {
   className?: string;
 };
 
-// AngleMark ile aynı çizim dili: stroke tabanlı, dolgusuz, keskin uçlar.
+// Ortak çizim dili: stroke tabanlı, dolgusuz, keskin uçlar.
 const shared = {
   viewBox: "0 0 24 24",
   fill: "none",

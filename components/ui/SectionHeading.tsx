@@ -1,5 +1,3 @@
-import { AngleMark } from "./AngleMark";
-
 type SectionHeadingProps = {
   eyebrow?: string;
   title: string;
@@ -22,12 +20,9 @@ export function SectionHeading({
   return (
     <div className={`flex flex-col gap-4 ${alignClass}`}>
       {eyebrow ? (
-        <div className="flex items-center gap-2">
-          <AngleMark className="h-4 w-4" variant={tone === "chalk" ? "signal" : "signal"} />
-          <span className={`font-mono text-xs uppercase tracking-[0.2em] ${subTone}`}>
-            {eyebrow}
-          </span>
-        </div>
+        <span className={`font-mono text-xs uppercase tracking-[0.2em] ${subTone}`}>
+          {eyebrow}
+        </span>
       ) : null}
       <h2 className={`font-display text-3xl md:text-4xl font-semibold ${textTone}`}>
         {title}

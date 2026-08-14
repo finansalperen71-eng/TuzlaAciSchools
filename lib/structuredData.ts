@@ -1,4 +1,18 @@
 import { site } from "@/content/site";
+import { type BreadcrumbItem } from "@/content/routes";
+
+export function getBreadcrumbJsonLd(items: BreadcrumbItem[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.label,
+      item: `${site.url}${item.href}`,
+    })),
+  };
+}
 
 export function getSchoolJsonLd() {
   const sameAs = Object.values(site.social).filter(Boolean);

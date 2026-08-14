@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { AngleMark } from "@/components/ui/AngleMark";
 import { Container } from "@/components/ui/Container";
+import { PageHero } from "@/components/ui/PageHero";
+import { getBreadcrumbTrail, getRoute } from "@/content/routes";
 import { getAllPosts } from "@/lib/mdx";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Blog",
-  description: "Eğitim, gelişim ve okul hayatı üzerine yazılarımız.",
+  ...getRoute("/blog"),
   path: "/blog",
 });
 
@@ -23,13 +23,7 @@ export default function BlogPage() {
     <>
       <section className="border-b border-line">
         <Container narrow className="flex flex-col gap-6 py-16 md:py-20">
-          <div className="flex items-center gap-2">
-            <AngleMark className="h-5 w-5" />
-            <span className="font-mono text-xs uppercase tracking-[0.2em] text-slate">Blog</span>
-          </div>
-          <h1 className="font-display text-4xl font-semibold text-ink md:text-5xl">
-            Blog Paylaşımları
-          </h1>
+          <PageHero {...getRoute("/blog")} description={undefined} breadcrumb={getBreadcrumbTrail("/blog")} />
         </Container>
       </section>
 

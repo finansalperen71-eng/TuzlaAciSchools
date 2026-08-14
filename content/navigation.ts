@@ -1,3 +1,5 @@
+import { routes, type RoutePath } from "./routes";
+
 export type NavLink = {
   label: string;
   href: string;
@@ -14,47 +16,46 @@ export function isNavGroup(entry: NavEntry): entry is NavGroup {
   return "items" in entry;
 }
 
+// Etiketler content/routes.ts'ten türetilir — burada hardcode edilmez. Böylece
+// bir href yazım hatası (yanlış rota adı) derleme hatası olur ve breadcrumb
+// ile menü etiketi hiç ayrışmaz. NavGroup başlıkları (Kurumsal/Eğitim/Medya/
+// Kayıt) burada kalır — bunlar menü organizasyonu, routes.ts'te karşılığı
+// olan gerçek sayfalar değil.
+function link(href: RoutePath): NavLink {
+  return { label: routes[href].label, href };
+}
+
 export const primaryNav: NavEntry[] = [
-  { label: "Anasayfa", href: "/" },
+  link("/"),
   {
     label: "Kurumsal",
     items: [
-      { label: "Hakkımızda", href: "/hakkimizda" },
-      { label: "Neden Açı Koleji", href: "/neden-aci-egitim-kurumlari" },
-      { label: "Tarihçe", href: "/tarihce" },
-      { label: "Kadromuz", href: "/kadromuz" },
+      link("/hakkimizda"),
+      link("/neden-aci-egitim-kurumlari"),
+      link("/tarihce"),
+      link("/kadromuz"),
     ],
   },
   {
     label: "Eğitim",
-    items: [
-      { label: "Anaokulu", href: "/anaokulu" },
-      { label: "İlkokul", href: "/ilkokul" },
-      { label: "Ortaokul", href: "/ortaokul" },
-    ],
+    items: [link("/anaokulu"), link("/ilkokul"), link("/ortaokul")],
   },
-  { label: "Başarılarımız", href: "/basarilarimiz" },
+  link("/basarilarimiz"),
   {
     label: "Medya",
-    items: [
-      { label: "Fotoğraf Galerisi", href: "/fotograf-galerisi" },
-      { label: "Video Galerisi", href: "/video-galerisi" },
-    ],
+    items: [link("/fotograf-galerisi"), link("/video-galerisi")],
   },
-  { label: "Blog", href: "/blog" },
+  link("/blog"),
   {
     label: "Kayıt",
-    items: [
-      { label: "Erken Kayıt Başvurusu", href: "/erken-kayit" },
-      { label: "Kayıt Süreci", href: "/kayit-sureci" },
-    ],
+    items: [link("/erken-kayit"), link("/kayit-sureci")],
   },
-  { label: "İletişim", href: "/iletisim" },
-  { label: "İnsan Kaynakları", href: "/insan-kaynaklari" },
+  link("/iletisim"),
+  link("/insan-kaynaklari"),
 ];
 
 export const legalNav: NavLink[] = [
-  { label: "KVKK Aydınlatma Metni", href: "/sozlesme/kvkk-aydinlatma-metni" },
-  { label: "Gizlilik Sözleşmesi", href: "/sozlesme/gizlilik-sozlesmesi" },
-  { label: "Çerez Politikası", href: "/sozlesme/cerez-politikasi" },
+  link("/sozlesme/kvkk-aydinlatma-metni"),
+  link("/sozlesme/gizlilik-sozlesmesi"),
+  link("/sozlesme/cerez-politikasi"),
 ];

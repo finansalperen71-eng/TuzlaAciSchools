@@ -1,12 +1,12 @@
-import { AngleMark } from "@/components/ui/AngleMark";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { PageHero } from "@/components/ui/PageHero";
 import { achievementStats } from "@/content/achievements";
+import { getBreadcrumbTrail, getRoute } from "@/content/routes";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Başarılarımız",
-  description: "Açı Eğitim Kurumları bünyesindeki liselerimizin YKS başarıları.",
+  ...getRoute("/basarilarimiz"),
   path: "/basarilarimiz",
 });
 
@@ -15,20 +15,11 @@ export default function BasarilarimizPage() {
     <>
       <section className="border-b border-line">
         <Container narrow className="flex flex-col gap-6 py-16 md:py-20">
-          <div className="flex items-center gap-2">
-            <AngleMark className="h-5 w-5" />
-            <span className="font-mono text-xs uppercase tracking-[0.2em] text-slate">
-              Şampiyonlar Açı&apos;dan
-            </span>
-          </div>
-          <h1 className="font-display text-4xl font-semibold text-ink md:text-5xl">
-            Başarılarımız
-          </h1>
-          <p className="text-base leading-relaxed text-slate md:text-lg">
-            Tuzla Açı Koleji, anaokulu, ilkokul ve ortaokul kademelerinde eğitim vermektedir.
-            Aşağıdaki YKS dereceleri, Açı Eğitim Kurumları bünyesindeki liselerimize aittir ve
-            kurumumuzun eğitim anlayışının bir parçası olarak paylaşılmaktadır.
-          </p>
+          <PageHero
+            {...getRoute("/basarilarimiz")}
+            description="Tuzla Açı Koleji, anaokulu, ilkokul ve ortaokul kademelerinde eğitim vermektedir. Aşağıdaki YKS dereceleri, Açı Eğitim Kurumları bünyesindeki liselerimize aittir ve kurumumuzun eğitim anlayışının bir parçası olarak paylaşılmaktadır."
+            breadcrumb={getBreadcrumbTrail("/basarilarimiz")}
+          />
         </Container>
       </section>
 

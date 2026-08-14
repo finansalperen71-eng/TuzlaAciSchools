@@ -1,9 +1,11 @@
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { AngleMark } from "@/components/ui/AngleMark";
+import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { Container } from "@/components/ui/Container";
+import { getBreadcrumbTrail } from "@/content/routes";
 import { getAllPosts, getPostBySlug, getPostSlugs } from "@/lib/mdx";
 import { buildMetadata } from "@/lib/seo";
+import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 
 const dateFormatter = new Intl.DateTimeFormat("tr-TR", {
   day: "numeric",
@@ -38,17 +40,20 @@ export default async function BlogPostPage({ params }: PageParams) {
   if (!exists) notFound();
 
   const post = getPostBySlug(slug);
+  const breadcrumb = [...getBreadcrumbTrail("/blog"), { label: post.title, href: `/blog/${post.slug}` }];
 
   return (
     <article>
       <section className="border-b border-line">
         <Container narrow className="flex flex-col gap-6 py-16 md:py-20">
-          <div className="flex items-center gap-2">
-            <AngleMark className="h-5 w-5" />
-            <time dateTime={post.date} className="font-mono text-xs uppercase tracking-[0.2em] text-slate">
-              {dateFormatter.format(new Date(post.date))}
-            </time>
-          </div>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(getBreadcrumbJsonLd(breadcrumb)) }}
+          />
+          <Breadcrumb items={breadcrumb} />
+          <time dateTime={post.date} className="font-mono text-xs uppercase tracking-[0.2em] text-slate">
+            {dateFormatter.format(new Date(post.date))}
+          </time>
           <h1 className="font-display text-3xl font-semibold text-ink md:text-5xl">
             {post.title}
           </h1>

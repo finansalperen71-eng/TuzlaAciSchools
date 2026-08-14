@@ -3,37 +3,37 @@ import { Container } from "@/components/ui/Container";
 import { Logo } from "./Logo";
 import { site } from "@/content/site";
 import { legalNav } from "@/content/navigation";
+import { routes, type RoutePath } from "@/content/routes";
 
 // Footer bağlantıları menünün birebir kopyası değil: tek sütunda 16 madde
 // dağınık okunuyordu. Burada veliye göre üç anlamlı gruba ayrıldı.
+function link(href: RoutePath) {
+  return { label: routes[href].label, href };
+}
+
 const footerGroups = [
   {
     label: "Kurumsal",
     items: [
-      { label: "Hakkımızda", href: "/hakkimizda" },
-      { label: "Neden Açı Koleji", href: "/neden-aci-egitim-kurumlari" },
-      { label: "Tarihçe", href: "/tarihce" },
-      { label: "Kadromuz", href: "/kadromuz" },
-      { label: "İnsan Kaynakları", href: "/insan-kaynaklari" },
+      link("/hakkimizda"),
+      link("/neden-aci-egitim-kurumlari"),
+      link("/tarihce"),
+      link("/kadromuz"),
+      link("/insan-kaynaklari"),
     ],
   },
   {
     label: "Eğitim",
-    items: [
-      { label: "Anaokulu", href: "/anaokulu" },
-      { label: "İlkokul", href: "/ilkokul" },
-      { label: "Ortaokul", href: "/ortaokul" },
-      { label: "Başarılarımız", href: "/basarilarimiz" },
-    ],
+    items: [link("/anaokulu"), link("/ilkokul"), link("/ortaokul"), link("/basarilarimiz")],
   },
   {
     label: "Kayıt ve Medya",
     items: [
-      { label: "Erken Kayıt Başvurusu", href: "/erken-kayit" },
-      { label: "Kayıt Süreci", href: "/kayit-sureci" },
-      { label: "Fotoğraf Galerisi", href: "/fotograf-galerisi" },
-      { label: "Video Galerisi", href: "/video-galerisi" },
-      { label: "Blog", href: "/blog" },
+      link("/erken-kayit"),
+      link("/kayit-sureci"),
+      link("/fotograf-galerisi"),
+      link("/video-galerisi"),
+      link("/blog"),
     ],
   },
 ];

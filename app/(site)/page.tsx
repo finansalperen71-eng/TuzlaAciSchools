@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { AngleMark } from "@/components/ui/AngleMark";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -26,12 +25,9 @@ export default function HomePage() {
       <section className="border-b border-line">
         <Container className="grid gap-12 py-20 md:py-28 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
           <div className="flex flex-col gap-6">
-            <div className="flex items-center gap-2">
-              <AngleMark className="h-5 w-5" />
-              <span className="font-mono text-xs uppercase tracking-[0.2em] text-slate">
-                {site.slogan}
-              </span>
-            </div>
+            <span className="font-mono text-xs uppercase tracking-[0.2em] text-slate">
+              {site.slogan}
+            </span>
             <h1 className="font-display text-4xl font-semibold text-ink md:text-6xl">
               Tuzla Açı Koleji
             </h1>
@@ -52,8 +48,7 @@ export default function HomePage() {
           </div>
 
           <div className="border border-ink bg-ink p-8 text-chalk md:p-10">
-            <AngleMark className="h-8 w-8" variant="chalk" />
-            <h2 className="mt-4 font-display text-2xl font-semibold md:text-3xl">
+            <h2 className="font-display text-2xl font-semibold md:text-3xl">
               Avantajlı Kayıt Fırsatları Devam Ediyor
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-chalk/75 md:text-base">
@@ -157,7 +152,6 @@ export default function HomePage() {
 
       <section>
         <Container className="flex flex-col items-center gap-6 py-20 text-center md:py-24">
-          <AngleMark className="h-8 w-8" />
           <h2 className="max-w-2xl font-display text-3xl font-semibold text-ink md:text-4xl">
             Açı Koleji ailesiyle tanışmak ister misiniz?
           </h2>

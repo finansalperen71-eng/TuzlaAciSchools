@@ -1,5 +1,6 @@
-import { AngleMark } from "@/components/ui/AngleMark";
 import { Container } from "@/components/ui/Container";
+import { PageHero } from "@/components/ui/PageHero";
+import { getBreadcrumbTrail, getRoute } from "@/content/routes";
 import { buildMetadata } from "@/lib/seo";
 
 const intro = [
@@ -20,8 +21,7 @@ const institutionTraits = [
 ];
 
 export const metadata = buildMetadata({
-  title: "Neden Açı Eğitim Kurumları?",
-  description: intro[0],
+  ...getRoute("/neden-aci-egitim-kurumlari"),
   path: "/neden-aci-egitim-kurumlari",
 });
 
@@ -29,15 +29,11 @@ export default function NedenAciPage() {
   return (
     <section>
       <Container narrow className="flex flex-col gap-8 py-16 md:py-20">
-        <div className="flex items-center gap-2">
-          <AngleMark className="h-5 w-5" />
-          <span className="font-mono text-xs uppercase tracking-[0.2em] text-slate">
-            Kurumsal
-          </span>
-        </div>
-        <h1 className="font-display text-4xl font-semibold text-ink md:text-5xl">
-          Neden Açı Eğitim Kurumları?
-        </h1>
+        <PageHero
+          {...getRoute("/neden-aci-egitim-kurumlari")}
+          description={undefined}
+          breadcrumb={getBreadcrumbTrail("/neden-aci-egitim-kurumlari")}
+        />
 
         <div className="flex flex-col gap-5">
           {intro.map((paragraph, index) => (
