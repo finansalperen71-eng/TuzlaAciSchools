@@ -51,15 +51,22 @@ export const levels: LevelContent[] = [
       heading: "Kulüpler ve Atölyeler",
       paragraphs: [
         "Çocuklarımız için planlanan açık hava öğrenme bahçesi, gündelik yaşam atölyesi ile mutfak deneyimleri, tiyatro, gezi, mekânsız etkileşimli masal-hikâye saatleri ile yaparak yaşayarak deneyim elde ettikleri süreçler planlanmaktadır.",
+        "Orman okulu oturumları ile çevreye duyarlı, doğayı seven ve koruyan çocuklar yetiştirmenin yanı sıra onların gelişimlerinde duyusal bütünlük, özgüven ve çözüm odaklı bakış açısı gibi katkılar sağlanmaktadır.",
+        "Branş dersleri: ergoterapi, drama, müzik, görsel sanatlar, temel hareket eğitimi, jimnastik, yüzme, robotik kodlama ve değerler eğitimi.",
       ],
     },
     language: {
       heading: "Yabancı Dil",
       paragraphs: [
-        "Half-Day English Programme (Yarım Günlük İngilizce Programı) sistemimiz çerçevesinde her derste alanında yetkin iki öğretmen bulunmaktadır.",
+        "Half-Day English Programme (Yarım Günlük İngilizce Programı) sistemimiz çerçevesinde her derste alanında yetkin iki öğretmen bulunmaktadır. Oxford Early Years Programı müfredatı kullanılmaktadır.",
       ],
     },
-    guidance: null,
+    guidance: {
+      heading: "Rehberlik",
+      paragraphs: [
+        "Rehberlik Biriminde Klinik Psikolog ve PDR Uzmanı sınıflara destek sağlamaktadır.",
+      ],
+    },
     faq: [],
   },
   {
@@ -85,9 +92,19 @@ export const levels: LevelContent[] = [
       ],
     },
     dailyFlow: null,
-    clubs: null,
+    clubs: {
+      heading: "Sosyal Sorumluluk ve Etkinlikler",
+      paragraphs: [
+        "Sosyal sorumluluk projeleri, kültürel, sanatsal ve çeşitli gezi programlarıyla öğrencilerin beceri ve yetenekleri geliştirilir. Sanatsal beceriler, sportif ilgi ve yetenekler belirlenip geliştirilir.",
+      ],
+    },
     language: null,
-    guidance: null,
+    guidance: {
+      heading: "Rehberlik",
+      paragraphs: [
+        "Rehberlik servisi ve sınıf öğretmenleri tarafından akademik başarıyı destekleyen çalışmalar geliştirilip takip edilir.",
+      ],
+    },
     faq: [],
   },
   {
