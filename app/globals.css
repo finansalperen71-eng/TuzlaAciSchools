@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+@theme {
+  /* Varsayılan Tailwind rengi paletini tamamen sil — yalnızca beş marka
+     token'ı kalsın. Yanlışlıkla yazılan bg-slate-50 / text-amber-500 gibi
+     sınıflar artık derlenmez. */
+  --color-*: initial;
+
+  /* Gerçek Açı Koleji marka kimliğinden alındı (logo + site paleti):
+     lacivert #173065 ve kırmızı #F80000 logodan örneklendi;
+     chalk/slate/line, sitenin kendi açık zemin/metin/kenarlık tonlarına
+     yakın soğuk mavi-gri değerlere çekildi. */
+  --color-ink: #173065;
+  --color-chalk: #f5f7fb;
+  --color-signal: #f80000;
+  --color-slate: #39557e;
+  --color-line: #d0dae9;
+
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  /* Doğa Koleji ile aynı aile: Open Sans. Başlık ve gövde aynı aileyi
+     paylaşır, ayrım ağırlık ve boyutla kurulur. */
+  --font-display: var(--font-open-sans), Arial, ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-open-sans), Arial, ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, SFMono-Regular, monospace;
+
+  --breakpoint-xs: 22.5rem; /* 360px */
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-chalk);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  ::selection {
+    background-color: var(--color-signal);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-signal);
+    outline-offset: 3px;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 100;
+    background-color: var(--color-ink);
+    color: var(--color-chalk);
+    padding: 0.75rem 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+  }
+
+  .skip-link:focus {
+    left: 1rem;
+    top: 1rem;
+  }
+}
+
+/* Tek orkestre açılış sekansı + scroll reveal. Bundan fazlası yok. */
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(1.25rem);
+    transition:
+      opacity 0.7s ease-out,
+      transform 0.7s ease-out;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .intro-item {
+    opacity: 0;
+    transform: translateY(0.75rem);
+    animation: intro-rise 0.6s ease-out forwards;
+  }
+
+  @keyframes intro-rise {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .intro-item {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
