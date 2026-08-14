@@ -37,6 +37,20 @@
     box-sizing: border-box;
   }
 
+  /* Header.tsx'in gerçek yüksekliği: Container py-5 (2.5rem) + Logo h-14
+     (3.5rem) = 6rem, md:h-16'da 6.5rem. Anasayfadaki hero video perdesi
+     (HeroCurtain) bu değere kilitlenir — Header veya Logo boyutu
+     değişirse burası da güncellenmeli, yoksa perde kayar. */
+  :root {
+    --header-h: 6rem;
+  }
+
+  @media (min-width: 768px) {
+    :root {
+      --header-h: 6.5rem;
+    }
+  }
+
   html {
     scroll-behavior: smooth;
   }
@@ -114,6 +128,28 @@
       transform: translateY(0);
     }
   }
+
+  /* Duyuru şeridi: iki eş kopya yan yana, track -50% kaydırılır — tam bir
+     kopya genişliği kadar, yani dikişsiz döngü. Her kopya min-w-full
+     shrink-0 olduğu için track her zaman tam 2× tek kopya genişliğindedir. */
+  .marquee-track {
+    animation: marquee-scroll 45s linear infinite;
+    will-change: transform;
+  }
+
+  .marquee-viewport:hover .marquee-track,
+  .marquee-viewport:focus-within .marquee-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -139,5 +175,12 @@
     opacity: 1;
     transform: none;
     animation: none;
+  }
+
+  /* Üstteki * kuralı animation-iteration-count'u 1'e indirip track'i
+     -50%'de bırakır — burada açıkça durdurmazsak şerit orada asılı kalır. */
+  .marquee-track {
+    animation: none;
+    transform: none;
   }
 }
