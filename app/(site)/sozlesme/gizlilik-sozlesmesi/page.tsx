@@ -10,7 +10,6 @@ const doc = getLegalDoc("gizlilik-sozlesmesi");
 export const metadata = buildMetadata({
   ...getRoute("/sozlesme/gizlilik-sozlesmesi"),
   path: "/sozlesme/gizlilik-sozlesmesi",
-  noIndex: true,
 });
 
 export default function GizlilikPage() {

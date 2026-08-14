@@ -8,7 +8,6 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   ...getRoute("/tarihce"),
   path: "/tarihce",
-  noIndex: true,
 });
 
 export default function TarihcePage() {

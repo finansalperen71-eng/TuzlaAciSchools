@@ -10,7 +10,6 @@ const doc = getLegalDoc("cerez-politikasi");
 export const metadata = buildMetadata({
   ...getRoute("/sozlesme/cerez-politikasi"),
   path: "/sozlesme/cerez-politikasi",
-  noIndex: true,
 });
 
 export default function CerezPolitikasiPage() {

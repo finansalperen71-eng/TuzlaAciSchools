@@ -8,7 +8,6 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   ...getRoute("/kadromuz"),
   path: "/kadromuz",
-  noIndex: true,
 });
 
 export default function KadromuzPage() {

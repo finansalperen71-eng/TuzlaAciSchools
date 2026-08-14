@@ -12,6 +12,8 @@ export type RouteMeta = {
   eyebrowTone?: "slate" | "signal";
   /** RoutePath olmalı ama RouteMeta<->RoutePath döngüsünü kırmak için string tutulur. */
   parent?: string;
+  /** buildMetadata'ya iletilir VE sitemap.ts bu sayfayı hariç tutar. */
+  noIndex?: boolean;
 };
 
 // Site genelindeki tüm sayfaların tek doğruluk kaynağı: breadcrumb, sitemap ve
@@ -47,6 +49,7 @@ export const routes = {
     eyebrow: "Kurumsal",
     description: "Tuzla Açı Koleji'nin kuruluşundan bugüne uzanan yolculuğu.",
     parent: "/",
+    noIndex: true,
   },
   "/kadromuz": {
     label: "Kadromuz",
@@ -54,6 +57,7 @@ export const routes = {
     eyebrow: "Kurumsal",
     description: "Yönetim ve öğretmen kadromuz hakkında bilgi.",
     parent: "/",
+    noIndex: true,
   },
   "/anaokulu": {
     label: "Anaokulu",
@@ -137,6 +141,7 @@ export const routes = {
     eyebrow: "Yasal",
     description: "Kişisel Verilerin Korunması Kanunu kapsamında aydınlatma metni.",
     parent: "/",
+    noIndex: true,
   },
   "/sozlesme/gizlilik-sozlesmesi": {
     label: "Gizlilik Sözleşmesi",
@@ -144,6 +149,7 @@ export const routes = {
     eyebrow: "Yasal",
     description: "Gizlilik sözleşmesi.",
     parent: "/",
+    noIndex: true,
   },
   "/sozlesme/cerez-politikasi": {
     label: "Çerez Politikası",
@@ -151,6 +157,7 @@ export const routes = {
     eyebrow: "Yasal",
     description: "Çerez politikası.",
     parent: "/",
+    noIndex: true,
   },
 } as const satisfies Record<string, RouteMeta>;
 

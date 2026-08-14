@@ -10,7 +10,6 @@ const doc = getLegalDoc("kvkk-aydinlatma-metni");
 export const metadata = buildMetadata({
   ...getRoute("/sozlesme/kvkk-aydinlatma-metni"),
   path: "/sozlesme/kvkk-aydinlatma-metni",
-  noIndex: true,
 });
 
 export default function KvkkPage() {
