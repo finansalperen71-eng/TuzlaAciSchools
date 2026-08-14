@@ -29,4 +29,12 @@ export const site = {
   },
   // TODO: Çalışma saatleri sağlanınca doldurulacak.
   openingHours: [] as { dayOfWeek: string; opens: string; closes: string }[],
+  // TODO: /public/video/hero.mp4 + /public/images/hero-poster.jpg sağlanınca
+  // enabled → true yapılacak. Dosyalar yokken HeroCurtain düz lacivert panel
+  // render eder (bkz. components/home/HeroCurtain.tsx).
+  heroVideo: {
+    enabled: false as boolean,
+    src: "/video/hero.mp4",
+    poster: "/images/hero-poster.jpg",
+  },
 } as const;

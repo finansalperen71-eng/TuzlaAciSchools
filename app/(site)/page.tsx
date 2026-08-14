@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { HeroCurtain } from "@/components/home/HeroCurtain";
 import { achievementStats } from "@/content/achievements";
 import { levels } from "@/content/levels";
 import { site } from "@/content/site";
@@ -21,7 +22,7 @@ export default function HomePage() {
   const posts = getLatestPosts(3);
 
   return (
-    <>
+    <HeroCurtain>
       <section className="border-b border-line">
         <Container className="grid gap-12 py-20 md:py-28 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
           <div className="flex flex-col gap-6">
@@ -169,6 +170,6 @@ export default function HomePage() {
           </div>
         </Container>
       </section>
-    </>
+    </HeroCurtain>
   );
 }
