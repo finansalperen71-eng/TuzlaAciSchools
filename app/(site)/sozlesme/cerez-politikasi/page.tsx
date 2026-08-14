@@ -1,19 +1,28 @@
-import { ComingSoon } from "@/components/ui/ComingSoon";
+import { Container } from "@/components/ui/Container";
+import { PageHero } from "@/components/ui/PageHero";
+import { LegalDocument } from "@/components/legal/LegalDocument";
+import { getBreadcrumbTrail, getRoute } from "@/content/routes";
+import { getLegalDoc } from "@/content/legal";
 import { buildMetadata } from "@/lib/seo";
 
+const doc = getLegalDoc("cerez-politikasi");
+
 export const metadata = buildMetadata({
-  title: "Çerez Politikası",
-  description: "Çerez politikası.",
+  ...getRoute("/sozlesme/cerez-politikasi"),
   path: "/sozlesme/cerez-politikasi",
   noIndex: true,
 });
 
 export default function CerezPolitikasiPage() {
   return (
-    <ComingSoon
-      eyebrow="Yasal"
-      title="Çerez Politikası"
-      description="Çerez politikamız kurumumuz tarafından hazırlanmaktadır ve yayına alınana kadar bu sayfa güncellenecektir."
-    />
+    <section>
+      <Container narrow className="flex flex-col gap-10 py-16 md:py-20">
+        <PageHero
+          {...getRoute("/sozlesme/cerez-politikasi")}
+          breadcrumb={getBreadcrumbTrail("/sozlesme/cerez-politikasi")}
+        />
+        <LegalDocument sections={doc.sections} />
+      </Container>
+    </section>
   );
 }
