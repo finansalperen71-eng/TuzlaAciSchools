@@ -29,11 +29,11 @@ export const site = {
   },
   // TODO: Çalışma saatleri sağlanınca doldurulacak.
   openingHours: [] as { dayOfWeek: string; opens: string; closes: string }[],
-  // TODO: /public/video/hero.mp4 + /public/images/hero-poster.jpg sağlanınca
-  // enabled → true yapılacak. Dosyalar yokken HeroCurtain düz lacivert panel
-  // render eder (bkz. components/home/HeroCurtain.tsx).
+  // public/video/hero.mp4 yüklendi, video aktif. Poster görseli henüz yok
+  // (public/images/hero-poster.jpg) — eklenene kadar video ilk karesi
+  // yüklenene kadar boş/siyah görünür, kritik değil.
   heroVideo: {
-    enabled: false as boolean,
+    enabled: true as boolean,
     src: "/video/hero.mp4",
     poster: "/images/hero-poster.jpg",
   },
