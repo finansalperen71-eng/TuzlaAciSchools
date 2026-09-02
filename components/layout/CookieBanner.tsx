@@ -20,7 +20,9 @@ export function CookieBanner() {
   }, []);
 
   function setConsent(value: ConsentValue) {
-    document.cookie = `${CONSENT_COOKIE}=${value}; path=/; max-age=${CONSENT_MAX_AGE}; SameSite=Lax`;
+    // HTTPS altında çerez yalnızca güvenli bağlantıda gönderilsin.
+    const secure = location.protocol === "https:" ? "; Secure" : "";
+    document.cookie = `${CONSENT_COOKIE}=${value}; path=/; max-age=${CONSENT_MAX_AGE}; SameSite=Lax${secure}`;
     setVisible(false);
     window.dispatchEvent(new Event("aci-consent-change"));
   }
@@ -39,7 +41,7 @@ export function CookieBanner() {
           zaman aktiftir; analitik çerezleri yalnızca onayınızla kullanırız. Detaylar için{" "}
           <Link
             href="/sozlesme/cerez-politikasi"
-            className="underline underline-offset-2 hover:text-signal"
+            className="underline underline-offset-2 hover:text-signal-deep"
           >
             Çerez Politikası
           </Link>

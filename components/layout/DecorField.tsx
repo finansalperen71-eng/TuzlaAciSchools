@@ -34,9 +34,29 @@ type Sprite = {
   style: CSSProperties;
 };
 
+// bg-* artık MASK'ta değil sprite başına seçiliyor — SVG yalnızca alfa maskesi
+// sağladığı için rengi tamamen bu sınıf belirler.
 const MASK =
-  "block bg-ink [mask-repeat:no-repeat] [mask-position:center] [mask-size:contain] " +
+  "block [mask-repeat:no-repeat] [mask-position:center] [mask-size:contain] " +
   "[-webkit-mask-repeat:no-repeat] [-webkit-mask-position:center] [-webkit-mask-size:contain]";
+
+// weight, opaklık çarpanı. Mevcut 0.11–0.16 aralığı laciverdin chalk üzerindeki
+// koyuluğuna göre ayarlanmıştı; honey gibi açık bir aksan aynı opaklıkta
+// neredeyse görünmez kalıyor. Çarpanlar tonun chalk'a karşı kontrastının
+// tersiyle (karekök yumuşatmalı) ölçeklenir, böylece hepsi eşit ağırlıkta okunur.
+// Sınıf adları statik string olmak zorunda — Tailwind kaynak tarayıcısı
+// `bg-${x}` gibi üretilmiş sınıfları göremez ve hiç CSS yazmaz.
+const PALETTE = [
+  { className: "bg-ink", weight: 1 },
+  { className: "bg-sky", weight: 1.6 },
+  { className: "bg-teal", weight: 1.7 },
+  { className: "bg-honey", weight: 2.2 },
+  { className: "bg-lilac", weight: 1.5 },
+] as const;
+
+// Renkli sprite'lar laciverte göre daha çok dikkat çekiyor; üst sınır olmadan
+// honey gibi ağır çarpanlı tonlar bağırmaya başlıyor.
+const MAX_OPACITY = 0.3;
 
 // Kaç dikey yuva üretilir — sayfadan uzunsa fazlası kırpılır.
 const SLOTS = 32;
@@ -47,6 +67,7 @@ function buildSprites(): Sprite[] {
   const rand = mulberry32(20_240_902);
   const between = (min: number, max: number) => min + (max - min) * rand();
   const pick = () => ICONS[Math.floor(rand() * ICONS.length)];
+  const pickTone = () => PALETTE[Math.floor(rand() * PALETTE.length)];
 
   const sprites: Sprite[] = [];
 
@@ -60,17 +81,18 @@ function buildSprites(): Sprite[] {
     // her zaman ekranda kalır.
     const edge = between(-1, 5);
     const size = between(4, 6);
+    const tone = pickTone();
 
     sprites.push({
       icon: pick(),
-      className: `absolute ${MASK} ${i % 3 === 2 ? "hidden sm:block" : ""}`,
+      className: `absolute ${MASK} ${tone.className} ${i % 3 === 2 ? "hidden sm:block" : ""}`,
       style: {
         top: `${top}px`,
         [onLeft ? "left" : "right"]: `${edge}%`,
         width: `${size}rem`,
         height: `${size}rem`,
         transform: `rotate(${between(-24, 24)}deg)`,
-        opacity: between(0.11, 0.16),
+        opacity: Math.min(between(0.11, 0.16) * tone.weight, MAX_OPACITY),
       },
     });
   }
@@ -79,10 +101,11 @@ function buildSprites(): Sprite[] {
   // ya da iki sütun arasındaki boşluğun arkasına düşse bile fark edilmesin.
   for (let j = 0; j < Math.ceil(SLOTS / 3); j += 1) {
     const size = between(3.75, 5.25);
+    const tone = pickTone();
 
     sprites.push({
       icon: pick(),
-      className: `absolute hidden lg:block ${MASK}`,
+      className: `absolute hidden lg:block ${MASK} ${tone.className}`,
       style: {
         // Kenar ikonlarının arasına düşsün diye 1.5 adım kaydırılmış başlangıç.
         top: `${Math.round(120 + j * STEP * 3 + STEP * 1.5 + between(-80, 80))}px`,
@@ -90,7 +113,7 @@ function buildSprites(): Sprite[] {
         width: `${size}rem`,
         height: `${size}rem`,
         transform: `rotate(${between(-18, 18)}deg)`,
-        opacity: between(0.055, 0.085),
+        opacity: Math.min(between(0.055, 0.085) * tone.weight, MAX_OPACITY),
       },
     });
   }

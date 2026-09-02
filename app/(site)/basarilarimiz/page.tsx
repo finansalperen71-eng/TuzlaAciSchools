@@ -44,14 +44,9 @@ export default function BasarilarimizPage() {
             <Button href="/erken-kayit" variant="primary">
               Erken Kayıt Başvurusu
             </Button>
-            <a
-              href="https://aciegitimkurumlari.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 border border-ink/20 px-6 py-3 font-mono text-sm uppercase tracking-wide text-ink transition-colors hover:border-ink"
-            >
+            <Button href="https://aciegitimkurumlari.com/" variant="ghost" external>
               Açı Eğitim Kurumları
-            </a>
+            </Button>
           </div>
         </Container>
       </section>

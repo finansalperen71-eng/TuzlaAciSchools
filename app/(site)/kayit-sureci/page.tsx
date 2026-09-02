@@ -28,7 +28,7 @@ export default function KayitSureciPage() {
           <div className="grid gap-px overflow-hidden border border-line bg-line md:grid-cols-4">
             {admissionSteps.map((step, index) => (
               <div key={step.title} className="flex flex-col gap-3 bg-chalk p-8">
-                <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
+                <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal-deep">
                   Adım {index + 1}
                 </span>
                 <h2 className="font-display text-xl font-semibold text-ink">{step.title}</h2>

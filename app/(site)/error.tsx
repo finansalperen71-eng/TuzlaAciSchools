@@ -18,7 +18,7 @@ export default function SiteError({
   return (
     <section>
       <Container narrow className="flex min-h-[50vh] flex-col items-center justify-center gap-6 py-20 text-center">
-        <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">Hata</span>
+        <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal-deep">Hata</span>
         <h1 className="font-display text-4xl font-semibold text-ink md:text-5xl">
           Bir şeyler ters gitti
         </h1>

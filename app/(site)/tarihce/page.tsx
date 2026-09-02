@@ -24,7 +24,7 @@ export default function TarihcePage() {
           <ol className="flex flex-col gap-6 border-l-2 border-signal pl-6">
             {timeline.map((entry) => (
               <li key={entry.year} className="flex flex-col gap-1">
-                <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
+                <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal-deep">
                   {entry.year}
                 </span>
                 <p className="text-base leading-relaxed text-slate">{entry.description}</p>

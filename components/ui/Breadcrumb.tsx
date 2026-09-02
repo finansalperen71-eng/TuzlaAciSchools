@@ -9,7 +9,7 @@ type BreadcrumbProps = {
 export function Breadcrumb({ items, tone = "ink" }: BreadcrumbProps) {
   if (items.length === 0) return null;
 
-  const linkClass = tone === "chalk" ? "text-chalk/60 hover:text-chalk" : "text-slate hover:text-signal";
+  const linkClass = tone === "chalk" ? "text-chalk/60 hover:text-chalk" : "text-slate hover:text-signal-deep";
   const currentClass = tone === "chalk" ? "text-chalk" : "text-ink";
   const separatorClass = tone === "chalk" ? "text-chalk/30" : "text-slate/40";
 

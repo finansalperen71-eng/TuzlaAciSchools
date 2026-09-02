@@ -76,8 +76,8 @@ export function MegaMenu() {
               key={entry.label}
               href={entry.href}
               aria-current={active ? "page" : undefined}
-              className={`px-3 py-2 text-[0.9375rem] font-semibold transition-colors hover:text-signal ${
-                active ? "text-signal" : "text-ink"
+              className={`px-3 py-2 text-[0.9375rem] font-semibold transition-colors hover:text-signal-deep ${
+                active ? "text-signal-deep" : "text-ink"
               }`}
             >
               {entry.label}
@@ -100,8 +100,8 @@ export function MegaMenu() {
               aria-controls={panelId}
               onClick={() => setOpenLabel(isOpen ? null : entry.label)}
               onKeyDown={(event) => onTriggerKeyDown(event, entry.label)}
-              className={`flex items-center gap-1 px-3 py-2 text-[0.9375rem] font-semibold transition-colors hover:text-signal ${
-                isOpen ? "text-signal" : "text-ink"
+              className={`flex items-center gap-1 px-3 py-2 text-[0.9375rem] font-semibold transition-colors hover:text-signal-deep ${
+                isOpen ? "text-signal-deep" : "text-ink"
               }`}
             >
               {entry.label}

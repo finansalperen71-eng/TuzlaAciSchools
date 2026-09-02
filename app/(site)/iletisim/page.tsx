@@ -39,13 +39,13 @@ export default function IletisimPage() {
               </div>
               <div>
                 <p className="font-mono text-xs uppercase tracking-wide text-ink">Telefon</p>
-                <a href={`tel:${site.phoneHref}`} className="font-mono hover:text-signal">
+                <a href={`tel:${site.phoneHref}`} className="font-mono hover:text-signal-deep">
                   {site.phone}
                 </a>
               </div>
               <div>
                 <p className="font-mono text-xs uppercase tracking-wide text-ink">E-posta</p>
-                <a href={`mailto:${site.email}`} className="hover:text-signal">
+                <a href={`mailto:${site.email}`} className="hover:text-signal-deep">
                   {site.email}
                 </a>
               </div>

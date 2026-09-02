@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
+import { PostCard } from "@/components/blog/PostCard";
 import { getBreadcrumbTrail, getRoute } from "@/content/routes";
 import { getAllPosts } from "@/lib/mdx";
 import { buildMetadata } from "@/lib/seo";
@@ -10,11 +10,9 @@ export const metadata = buildMetadata({
   path: "/blog",
 });
 
-const dateFormatter = new Intl.DateTimeFormat("tr-TR", {
-  day: "numeric",
-  month: "long",
-  year: "numeric",
-});
+// Container max-w-7xl (1280px), yani iki sütunda bir slot asla ~620px'i
+// geçmiyor; naif "50vw" 1920px ekranda gereksiz yere 960px'lik görsel çekerdi.
+const CARD_SIZES = "(min-width: 1280px) 620px, (min-width: 768px) 50vw, 100vw";
 
 export default function BlogPage() {
   const posts = getAllPosts();
@@ -29,39 +27,15 @@ export default function BlogPage() {
 
       <section>
         <Container className="py-16 md:py-20">
-          <div className="grid gap-px overflow-hidden border border-line bg-line md:grid-cols-2">
-            {posts.map((post) => (
-              <Link
+          <div className="grid gap-6 md:grid-cols-2">
+            {posts.map((post, index) => (
+              <PostCard
                 key={post.slug}
-                href={`/blog/${post.slug}`}
-                className="group flex flex-col gap-4 bg-chalk p-8 transition-colors hover:bg-ink"
-              >
-                <div className="flex flex-wrap items-center gap-3">
-                  <time
-                    dateTime={post.date}
-                    className="font-mono text-xs uppercase tracking-wide text-signal"
-                  >
-                    {dateFormatter.format(new Date(post.date))}
-                  </time>
-                  {post.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="font-mono text-xs uppercase tracking-wide text-slate group-hover:text-chalk/60"
-                    >
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
-                <h2 className="font-display text-2xl font-semibold text-ink group-hover:text-chalk">
-                  {post.title}
-                </h2>
-                <p className="text-sm leading-relaxed text-slate group-hover:text-chalk/75">
-                  {post.description}
-                </p>
-                <span className="mt-auto font-mono text-xs uppercase tracking-wide text-signal">
-                  Devamını Oku →
-                </span>
-              </Link>
+                post={post}
+                sizes={CARD_SIZES}
+                priority={index === 0}
+                showExcerpt
+              />
             ))}
           </div>
         </Container>

@@ -3,7 +3,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { Container } from "@/components/ui/Container";
 import { getBreadcrumbTrail } from "@/content/routes";
-import { getAllPosts, getPostBySlug, getPostSlugs } from "@/lib/mdx";
+import { getPostBySlug, getPostSlugs } from "@/lib/mdx";
 import { buildMetadata } from "@/lib/seo";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 
@@ -21,8 +21,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageParams) {
   const { slug } = await params;
-  const posts = getAllPosts();
-  const exists = posts.some((post) => post.slug === slug);
+  const exists = getPostSlugs().includes(slug);
   if (!exists) return {};
 
   const post = getPostBySlug(slug);
@@ -35,8 +34,7 @@ export async function generateMetadata({ params }: PageParams) {
 
 export default async function BlogPostPage({ params }: PageParams) {
   const { slug } = await params;
-  const posts = getAllPosts();
-  const exists = posts.some((post) => post.slug === slug);
+  const exists = getPostSlugs().includes(slug);
   if (!exists) notFound();
 
   const post = getPostBySlug(slug);
@@ -61,7 +59,7 @@ export default async function BlogPostPage({ params }: PageParams) {
           {post.tags.length > 0 ? (
             <div className="flex flex-wrap gap-3">
               {post.tags.map((tag) => (
-                <span key={tag} className="font-mono text-xs uppercase tracking-wide text-signal">
+                <span key={tag} className="font-mono text-xs uppercase tracking-wide text-signal-deep">
                   #{tag}
                 </span>
               ))}
@@ -76,7 +74,7 @@ export default async function BlogPostPage({ params }: PageParams) {
             className="flex flex-col gap-5 text-base leading-relaxed text-slate md:text-lg
               [&_h2]:mt-6 [&_h2]:font-display [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-ink
               [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6
-              [&_a]:text-signal [&_a]:underline [&_a]:underline-offset-2"
+              [&_a]:text-signal-deep [&_a]:underline [&_a]:underline-offset-2"
           >
             <MDXRemote source={post.content} />
           </div>

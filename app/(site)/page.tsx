@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { HeroCurtain } from "@/components/home/HeroCurtain";
+import { PostCard } from "@/components/blog/PostCard";
 import { achievementStats } from "@/content/achievements";
 import { levels } from "@/content/levels";
 import { site } from "@/content/site";
@@ -18,6 +19,10 @@ export const metadata = {
   }),
   title: { absolute: site.name },
 };
+
+// Üç sütunda bir slot 1280px'lik Container içinde ~400px; kartlar kıvrımın
+// çok altında olduğu için hiçbiri priority değil.
+const HOME_CARD_SIZES = "(min-width: 1280px) 400px, (min-width: 768px) 33vw, 100vw";
 
 export default function HomePage() {
   const posts = getLatestPosts(3);
@@ -74,7 +79,7 @@ export default function HomePage() {
                 href={`/${level.slug}`}
                 className="group flex flex-col gap-4 bg-chalk p-8 transition-colors hover:bg-ink"
               >
-                <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
+                <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal-deep">
                   {level.ageRange}
                 </span>
                 <h3 className="font-display text-2xl font-semibold text-ink group-hover:text-chalk">
@@ -83,7 +88,7 @@ export default function HomePage() {
                 <p className="text-sm leading-relaxed text-slate group-hover:text-chalk/75">
                   {level.summary}
                 </p>
-                <span className="mt-auto font-mono text-xs uppercase tracking-wide text-signal">
+                <span className="mt-auto font-mono text-xs uppercase tracking-wide text-signal-deep">
                   İncele →
                 </span>
               </Link>
@@ -123,30 +128,17 @@ export default function HomePage() {
       {posts.length > 0 ? (
         <section className="border-b border-line">
           <Container className="py-20 md:py-24">
-            <SectionHeading eyebrow="Blog" title="Blog Paylaşımları" />
-            <div className="mt-10 grid gap-8 md:grid-cols-3">
-              {posts.map((post) => (
-                <Link
-                  key={post.slug}
-                  href={`/blog/${post.slug}`}
-                  className="group flex flex-col gap-3 border border-line p-6 transition-colors hover:border-signal"
-                >
-                  <h3 className="font-display text-xl font-semibold text-ink group-hover:text-signal">
-                    {post.title}
-                  </h3>
-                  <p className="line-clamp-3 text-sm leading-relaxed text-slate">
-                    {post.description}
-                  </p>
-                  <span className="mt-auto font-mono text-xs uppercase tracking-wide text-signal">
-                    Devamını Oku →
-                  </span>
-                </Link>
-              ))}
-            </div>
-            <div className="mt-8">
-              <Button href="/blog" variant="ghost">
-                Tüm Blog Paylaşımları
+            {/* Başlık solda, "tümü" bağlantısı sağda — mobilde alt alta. */}
+            <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+              <SectionHeading eyebrow="Blog" title="Blog Paylaşımları" />
+              <Button href="/blog" variant="ghost" className="shrink-0 self-start sm:self-auto">
+                Tüm Blog Paylaşımları →
               </Button>
+            </div>
+            <div className="mt-10 grid gap-6 md:grid-cols-3">
+              {posts.map((post) => (
+                <PostCard key={post.slug} post={post} sizes={HOME_CARD_SIZES} />
+              ))}
             </div>
           </Container>
         </section>
@@ -165,7 +157,7 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(23,48,101,0.82)_0%,rgba(23,48,101,0.6)_55%,rgba(23,48,101,0.38)_100%)]" />
 
         <Container className="relative flex flex-col items-center gap-6 py-24 text-center md:py-32">
-          <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
+          <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal-deep">
             Açı Ailesi
           </span>
           <h2 className="max-w-2xl font-display text-3xl font-semibold text-chalk md:text-4xl">

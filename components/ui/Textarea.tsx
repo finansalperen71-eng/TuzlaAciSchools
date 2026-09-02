@@ -24,7 +24,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           {...rest}
         />
         {error ? (
-          <p id={`${textareaId}-error`} className="text-sm text-signal" role="alert">
+          <p id={`${textareaId}-error`} className="text-sm text-signal-deep" role="alert">
             {error}
           </p>
         ) : null}

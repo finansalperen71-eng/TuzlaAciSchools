@@ -41,7 +41,7 @@ export function PageHero({
       {eyebrow ? (
         <span
           className={`font-mono text-xs uppercase tracking-[0.2em] ${
-            eyebrowTone === "signal" ? "text-signal" : "text-slate"
+            eyebrowTone === "signal" ? "text-signal-deep" : "text-slate"
           }`}
         >
           {eyebrow}

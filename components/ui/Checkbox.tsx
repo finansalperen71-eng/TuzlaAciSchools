@@ -26,7 +26,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           </label>
         </div>
         {error ? (
-          <p id={`${checkboxId}-error`} className="text-sm text-signal" role="alert">
+          <p id={`${checkboxId}-error`} className="text-sm text-signal-deep" role="alert">
             {error}
           </p>
         ) : null}

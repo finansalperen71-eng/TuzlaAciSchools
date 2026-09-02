@@ -23,7 +23,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           {...rest}
         />
         {error ? (
-          <p id={`${inputId}-error`} className="text-sm text-signal" role="alert">
+          <p id={`${inputId}-error`} className="text-sm text-signal-deep" role="alert">
             {error}
           </p>
         ) : null}
