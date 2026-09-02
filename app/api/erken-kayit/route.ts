@@ -1,10 +1,20 @@
 import { NextResponse } from "next/server";
+import { assertJsonRequest, assertSameOrigin, readJsonBody, tooManyRequests } from "@/lib/apiGuards";
 import { applicationGradeOptions, earlyRegistrationSchema } from "@/lib/formSchemas";
 import { getContactRecipient, getTransport } from "@/lib/mailer";
+import { checkRateLimit, getClientIp } from "@/lib/rateLimit";
 import { site } from "@/content/site";
 
 export async function POST(request: Request) {
-  const body = await request.json().catch(() => null);
+  const guard = assertJsonRequest(request) ?? assertSameOrigin(request);
+  if (guard) return guard;
+
+  const { allowed, retryAfter } = checkRateLimit(`erken-kayit:${getClientIp(request)}`);
+  if (!allowed) return tooManyRequests(retryAfter);
+
+  const { body, error } = await readJsonBody(request);
+  if (error) return error;
+
   const parsed = earlyRegistrationSchema.safeParse(body);
 
   if (!parsed.success) {
@@ -14,7 +24,10 @@ export async function POST(request: Request) {
     );
   }
 
-  const { studentName, parentName, phone, email, grade } = parsed.data;
+  const { studentName, parentName, phone, email, grade, website } = parsed.data;
+
+  if (website) return NextResponse.json({ ok: true });
+
   const gradeLabel = applicationGradeOptions.find((option) => option.value === grade)?.label ?? grade;
 
   try {

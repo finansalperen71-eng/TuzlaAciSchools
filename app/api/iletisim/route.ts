@@ -1,10 +1,22 @@
 import { NextResponse } from "next/server";
+import { assertJsonRequest, assertSameOrigin, readJsonBody, tooManyRequests } from "@/lib/apiGuards";
 import { contactSchema } from "@/lib/formSchemas";
 import { getContactRecipient, getTransport } from "@/lib/mailer";
+import { checkRateLimit, getClientIp } from "@/lib/rateLimit";
 import { site } from "@/content/site";
 
 export async function POST(request: Request) {
-  const body = await request.json().catch(() => null);
+  const guard = assertJsonRequest(request) ?? assertSameOrigin(request);
+  if (guard) return guard;
+
+  // Rate limit gövdeyi okumadan önce uygulanır: kötü niyetli isteğin
+  // payload'ını hiç işlememiş oluyoruz.
+  const { allowed, retryAfter } = checkRateLimit(`iletisim:${getClientIp(request)}`);
+  if (!allowed) return tooManyRequests(retryAfter);
+
+  const { body, error } = await readJsonBody(request);
+  if (error) return error;
+
   const parsed = contactSchema.safeParse(body);
 
   if (!parsed.success) {
@@ -14,7 +26,11 @@ export async function POST(request: Request) {
     );
   }
 
-  const { name, phone, email, message } = parsed.data;
+  const { name, phone, email, message, website } = parsed.data;
+
+  // Honeypot doluysa bot: başarılı yanıt dön ama mail gönderme.
+  // Farklı bir hata dönmek, bota tuzağın yerini öğretirdi.
+  if (website) return NextResponse.json({ ok: true });
 
   try {
     const transport = getTransport();

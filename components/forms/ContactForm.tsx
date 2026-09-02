@@ -26,6 +26,7 @@ export function ContactForm() {
       email: data.get("email"),
       message: data.get("message"),
       consent: data.get("consent") === "on",
+      website: data.get("website") ?? "",
     };
 
     try {
@@ -60,6 +61,18 @@ export function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-5">
+      {/* Honeypot: ekran okuyuculardan ve klavye sırasından gizli, gerçek
+          kullanıcı görmez. Botlar otomatik doldurur; sunucu bu alan doluysa
+          maili sessizce atmaz. display:none yerine ekran dışına taşındı —
+          bazı botlar display:none alanları atlar. */}
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute left-[-9999px] h-0 w-0 opacity-0"
+      />
       <Input label="Ad Soyad" name="name" required />
       <Input label="Telefon" name="phone" type="tel" required />
       <Input label="E-posta" name="email" type="email" required />
@@ -71,7 +84,7 @@ export function ContactForm() {
           <>
             <Link
               href="/sozlesme/kvkk-aydinlatma-metni"
-              className="underline underline-offset-2 hover:text-signal"
+              className="underline underline-offset-2 hover:text-signal-deep"
             >
               KVKK Aydınlatma Metni
             </Link>
@@ -80,7 +93,7 @@ export function ContactForm() {
         }
       />
       {status === "error" ? (
-        <p className="text-sm text-signal" role="alert">
+        <p className="text-sm text-signal-deep" role="alert">
           {errorMessage}
         </p>
       ) : null}

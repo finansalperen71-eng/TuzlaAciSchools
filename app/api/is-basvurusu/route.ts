@@ -1,10 +1,20 @@
 import { NextResponse } from "next/server";
+import { assertJsonRequest, assertSameOrigin, readJsonBody, tooManyRequests } from "@/lib/apiGuards";
 import { careerApplicationSchema } from "@/lib/formSchemas";
 import { getContactRecipient, getTransport } from "@/lib/mailer";
+import { checkRateLimit, getClientIp } from "@/lib/rateLimit";
 import { site } from "@/content/site";
 
 export async function POST(request: Request) {
-  const body = await request.json().catch(() => null);
+  const guard = assertJsonRequest(request) ?? assertSameOrigin(request);
+  if (guard) return guard;
+
+  const { allowed, retryAfter } = checkRateLimit(`is-basvurusu:${getClientIp(request)}`);
+  if (!allowed) return tooManyRequests(retryAfter);
+
+  const { body, error } = await readJsonBody(request);
+  if (error) return error;
+
   const parsed = careerApplicationSchema.safeParse(body);
 
   if (!parsed.success) {
@@ -14,7 +24,9 @@ export async function POST(request: Request) {
     );
   }
 
-  const { name, phone, email, position, message } = parsed.data;
+  const { name, phone, email, position, message, website } = parsed.data;
+
+  if (website) return NextResponse.json({ ok: true });
 
   try {
     const transport = getTransport();

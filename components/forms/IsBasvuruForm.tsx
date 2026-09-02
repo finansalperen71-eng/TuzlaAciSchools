@@ -27,6 +27,7 @@ export function IsBasvuruForm() {
       position: data.get("position"),
       message: data.get("message"),
       consent: data.get("consent") === "on",
+      website: data.get("website") ?? "",
     };
 
     try {
@@ -62,6 +63,18 @@ export function IsBasvuruForm() {
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-5">
+      {/* Honeypot: ekran okuyuculardan ve klavye sırasından gizli, gerçek
+          kullanıcı görmez. Botlar otomatik doldurur; sunucu bu alan doluysa
+          maili sessizce atmaz. display:none yerine ekran dışına taşındı —
+          bazı botlar display:none alanları atlar. */}
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute left-[-9999px] h-0 w-0 opacity-0"
+      />
       <div className="grid gap-5 sm:grid-cols-2">
         <Input label="Ad Soyad" name="name" required />
         <Input label="Başvurulan Branş / Pozisyon" name="position" required />
@@ -78,7 +91,7 @@ export function IsBasvuruForm() {
           <>
             <Link
               href="/sozlesme/kvkk-aydinlatma-metni"
-              className="underline underline-offset-2 hover:text-signal"
+              className="underline underline-offset-2 hover:text-signal-deep"
             >
               KVKK Aydınlatma Metni
             </Link>
@@ -87,7 +100,7 @@ export function IsBasvuruForm() {
         }
       />
       {status === "error" ? (
-        <p className="text-sm text-signal" role="alert">
+        <p className="text-sm text-signal-deep" role="alert">
           {errorMessage}
         </p>
       ) : null}
