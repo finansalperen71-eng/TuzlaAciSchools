@@ -12,7 +12,6 @@ export const metadata = buildMetadata({
 });
 
 export default function IletisimPage() {
-  const mapQuery = encodeURIComponent(site.address.full);
   const breadcrumb = getBreadcrumbTrail("/iletisim");
 
   return (
@@ -55,7 +54,7 @@ export default function IletisimPage() {
             <div className="aspect-[4/3] border border-line">
               <iframe
                 title="Tuzla Açı Koleji Konumu"
-                src={`https://www.google.com/maps?q=${mapQuery}&output=embed`}
+                src={site.mapEmbedSrc}
                 className="h-full w-full"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

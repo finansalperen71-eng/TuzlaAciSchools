@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -151,12 +152,26 @@ export default function HomePage() {
         </section>
       ) : null}
 
-      <section>
-        <Container className="flex flex-col items-center gap-6 py-20 text-center md:py-24">
-          <h2 className="max-w-2xl font-display text-3xl font-semibold text-ink md:text-4xl">
+      <section className="relative isolate overflow-hidden bg-ink">
+        <Image
+          src="/images/banner-dark.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+        {/* Merkeze doğru koyulaşan radyal örtü: metin her zaman okunur kalır,
+            görselin dalga/parıltı dokusu kenarlarda canlı kalmaya devam eder. */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(23,48,101,0.82)_0%,rgba(23,48,101,0.6)_55%,rgba(23,48,101,0.38)_100%)]" />
+
+        <Container className="relative flex flex-col items-center gap-6 py-24 text-center md:py-32">
+          <span className="font-mono text-xs uppercase tracking-[0.2em] text-signal">
+            Açı Ailesi
+          </span>
+          <h2 className="max-w-2xl font-display text-3xl font-semibold text-chalk md:text-4xl">
             Açı Koleji ailesiyle tanışmak ister misiniz?
           </h2>
-          <p className="max-w-xl text-base text-slate">
+          <p className="max-w-xl text-base text-chalk/75">
             Kampüsümüzü yerinde görmek, eğitim programlarımız hakkında bilgi almak veya kayıt
             sürecini başlatmak için bize ulaşın.
           </p>
@@ -164,7 +179,7 @@ export default function HomePage() {
             <Button href="/erken-kayit" variant="primary">
               Erken Kayıt Başvurusu
             </Button>
-            <Button href="/iletisim" variant="ghost">
+            <Button href="/iletisim" variant="secondary">
               Bize Ulaşın
             </Button>
           </div>

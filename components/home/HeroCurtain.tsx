@@ -1,4 +1,5 @@
 import { type ReactNode } from "react";
+import { DecorField } from "@/components/layout/DecorField";
 import { site } from "@/content/site";
 
 type HeroCurtainProps = {
@@ -45,6 +46,7 @@ export function HeroCurtain({ children }: HeroCurtainProps) {
       </div>
 
       <div className="relative z-10 bg-chalk shadow-[0_-24px_48px_rgba(23,48,101,0.18)]">
+        <DecorField />
         {children}
       </div>
     </div>

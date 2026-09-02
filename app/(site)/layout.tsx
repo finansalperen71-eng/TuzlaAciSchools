@@ -1,8 +1,10 @@
 import { AnalyticsScripts } from "@/components/layout/AnalyticsScripts";
 import { CookieBanner } from "@/components/layout/CookieBanner";
+import { DecorField } from "@/components/layout/DecorField";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { Marquee } from "@/components/layout/Marquee";
+import { PromoModal } from "@/components/layout/PromoModal";
 import { RadialMenu } from "@/components/layout/RadialMenu";
 import { getSchoolJsonLd } from "@/lib/structuredData";
 
@@ -22,10 +24,14 @@ export default function SiteLayout({
       </a>
       <Marquee />
       <Header />
-      <main id="main-content">{children}</main>
+      <main id="main-content" className="relative isolate bg-chalk">
+        <DecorField />
+        {children}
+      </main>
       <Footer />
       <RadialMenu />
       <CookieBanner />
+      <PromoModal />
       <AnalyticsScripts />
     </>
   );

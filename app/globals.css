@@ -150,6 +150,28 @@
       transform: translateX(-50%);
     }
   }
+
+  /* PromoModal giriş: perde belirir, panel hafifçe yükselerek oturur. */
+  .promo-modal-backdrop {
+    animation: promo-modal-fade 0.25s ease-out;
+  }
+
+  .promo-modal-panel {
+    animation: promo-modal-rise 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes promo-modal-fade {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @keyframes promo-modal-rise {
+    from {
+      opacity: 0;
+      transform: translateY(0.75rem) scale(0.98);
+    }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
