@@ -59,7 +59,23 @@ const nextConfig: NextConfig = {
   outputFileTracingRoot: path.join(__dirname),
   poweredByHeader: false,
   async headers() {
-    return [{ source: "/(.*)", headers: securityHeaders }];
+    return [
+      { source: "/(.*)", headers: securityHeaders },
+      // Vercel public/ altındaki dosyalara varsayılan olarak
+      // max-age=0, must-revalidate veriyor (dosya adı content-hash
+      // içermediği için). Hero videosu (18.4 MB) ve dekor SVG'leri
+      // (mask-image: url(...) ile next/image'tan geçmeden doğrudan
+      // çekiliyor) her ziyarette bu yüzden yeniden doğrulanıyordu.
+      //
+      // immutable bilinçli olarak yok: dosya adı versiyonlu değil, video
+      // ileride aynı adla değiştirilirse immutable tarayıcılarda bir yıl
+      // boyunca eskisini gösterirdi. 30 gün, versiyonsuz bir dosya için
+      // doğru denge — video değişirse en fazla 30 gün gecikme olur.
+      {
+        source: "/(video|decor)/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=2592000" }],
+      },
+    ];
   },
   async redirects() {
     return [

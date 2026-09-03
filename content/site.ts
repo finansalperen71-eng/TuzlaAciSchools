@@ -30,9 +30,9 @@ export const site = {
   },
   // TODO: Çalışma saatleri sağlanınca doldurulacak.
   openingHours: [] as { dayOfWeek: string; opens: string; closes: string }[],
-  // public/video/hero.mp4 yüklendi, video aktif. Poster görseli henüz yok
-  // (public/images/hero-poster.jpg) — eklenene kadar video ilk karesi
-  // yüklenene kadar boş/siyah görünür, kritik değil.
+  // public/video/hero.mp4 yüklendi, video aktif. poster videonun ilk
+  // karesinden üretildi (ffmpeg -ss 0.5 -frames:v 1) — next/image ile
+  // HeroCurtain'de render edilir, video çözülene kadar görünür kalır.
   heroVideo: {
     enabled: true as boolean,
     src: "/video/hero.mp4",

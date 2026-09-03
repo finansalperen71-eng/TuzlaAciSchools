@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { type ReactNode } from "react";
 import { DecorField } from "@/components/layout/DecorField";
 import { site } from "@/content/site";
@@ -23,19 +24,34 @@ export function HeroCurtain({ children }: HeroCurtainProps) {
         className="sticky top-[var(--header-h)] z-0 h-[calc(100svh-var(--header-h))] overflow-hidden bg-ink"
       >
         {site.heroVideo.enabled ? (
-          <video
-            className="h-full w-full object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            poster={site.heroVideo.poster}
-            aria-hidden="true"
-            tabIndex={-1}
-          >
-            <source src={site.heroVideo.src} type="video/mp4" />
-          </video>
+          <>
+            {/* HTML poster attribute yerine next/image: aynı kaynak dosya
+                AVIF/WebP'ye ve gerçek görüntülenen boyuta indirgenir, ham
+                JPEG'den belirgin ölçüde daha az bayt. Video ilk kareyi
+                çözene kadar bu görsel görünür kalır, video başlayınca
+                DOM sırası gereği üstüne kayar (ikisi de position: absolute,
+                sticky ebeveyn zaten positioned bir containing block). */}
+            <Image
+              src={site.heroVideo.poster}
+              alt=""
+              fill
+              sizes="100vw"
+              priority
+              className="object-cover"
+            />
+            <video
+              className="absolute inset-0 h-full w-full object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-hidden="true"
+              tabIndex={-1}
+            >
+              <source src={site.heroVideo.src} type="video/mp4" />
+            </video>
+          </>
         ) : (
           <div className="flex h-full w-full items-center justify-center">
             <span className="font-mono text-xs uppercase tracking-[0.2em] text-chalk/40">
