@@ -46,6 +46,16 @@ export const ACCENT_CHIP: Record<Accent, string> = {
   lilac: "bg-lilac-soft text-lilac-deep",
 };
 
+// Açık zeminde düz metin için (ör. kadro kartındaki branş satırı). Her zaman
+// -deep varyantı: honey chalk üzerinde 2.01 kontrast veriyor, metin/ikon
+// olarak asla tek başına kullanılamaz.
+export const ACCENT_TEXT: Record<Accent, string> = {
+  sky: "text-sky-deep",
+  teal: "text-teal-deep",
+  honey: "text-honey-deep",
+  lilac: "text-lilac-deep",
+};
+
 export const ACCENT_PLATE_BG: Record<Accent, string> = {
   sky: "bg-sky-soft",
   teal: "bg-teal-soft",
