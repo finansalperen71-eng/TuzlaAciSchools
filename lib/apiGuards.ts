@@ -12,6 +12,17 @@ const MAX_BODY_BYTES = 20_000;
 function allowedOrigins(): string[] {
   const origins: string[] = [site.url];
 
+  // site.url apex'i tutuyor (https://tuzlaacikoleji.com.tr) ama Vercel'in
+  // domain ayarı apex'i www'ye yönlendiriyor — kullanıcı fiilen
+  // www.tuzlaacikoleji.com.tr'den form gönderiyor ve tarayıcı Origin
+  // başlığında o host'u taşıyor. www karşılığı eklenmezse gerçek
+  // ziyaretçilerin isteği burada 403'e düşüyordu.
+  const siteUrl = new URL(site.url);
+  const counterpartHost = siteUrl.hostname.startsWith("www.")
+    ? siteUrl.hostname.slice(4)
+    : `www.${siteUrl.hostname}`;
+  origins.push(`${siteUrl.protocol}//${counterpartHost}`);
+
   // Geliştirme sırasında localhost'tan gelen isteklere izin ver.
   if (process.env.NODE_ENV !== "production") {
     origins.push("http://localhost:3000", "http://127.0.0.1:3000");
