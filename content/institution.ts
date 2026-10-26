@@ -5,15 +5,24 @@ export type TimelineEntry = { year: string; description: string };
 // edilmedi — gerçek bir kurum hakkında yanlış bilgi yayınlamamak için.
 export const timeline: TimelineEntry[] = [];
 
-export type StaffGroup = "yonetim" | "anaokulu" | "ilkokul" | "ortaokul";
+// "brans": tek bir kademeye bağlı olmayan branş öğretmenleri (bölüm
+// başkanları, beden eğitimi vb.).
+export type StaffGroup = "yonetim" | "anaokulu" | "ilkokul" | "ortaokul" | "brans";
 
-export const STAFF_GROUP_ORDER: StaffGroup[] = ["yonetim", "anaokulu", "ilkokul", "ortaokul"];
+export const STAFF_GROUP_ORDER: StaffGroup[] = [
+  "yonetim",
+  "anaokulu",
+  "ilkokul",
+  "ortaokul",
+  "brans",
+];
 
 export const STAFF_GROUP_LABEL: Record<StaffGroup, string> = {
   yonetim: "Yönetim",
   anaokulu: "Anaokulu",
   ilkokul: "İlkokul",
   ortaokul: "Ortaokul",
+  brans: "Branş Öğretmenleri",
 };
 
 export type StaffMember = {
@@ -27,21 +36,38 @@ export type StaffMember = {
   group: StaffGroup;
 };
 
-// TODO: Yönetim ve öğretmen kadrosu bilgileri (isim, unvan/branş, fotoğraf)
-// kurumdan sağlandığında bu dizi doldurulacak. Somut isim icat edilmedi —
-// gerçek bir kurumun canlı sitesinde uydurma kadro bilgisi yayınlamamak için.
+// TODO: Kadronun geri kalanı kurumdan geldikçe eklenecek. Somut isim icat
+// edilmedi — gerçek bir kurumun canlı sitesinde uydurma kadro bilgisi
+// yayınlamamak için; aşağıdakilerin hepsi kurumdan geldi.
 //
-// Doldurmak için: aşağıdaki bloğun yorumunu kaldırıp gerçek kadroyla değiştirin.
 // Fotoğraf: public/images/kadro/<slug>.jpg (yoksa kart baş harf plakası gösterir).
+// Mevcut fotoğraflar aynı kurala göre kırpıldı (baş kadraj yüksekliğinin
+// ~%30'u, başın üstü tepeden ~%12 aşağıda, yüz ortada) — yenileri de öyle
+// olmalı ki ızgarada yüzler aynı boyda dursun.
 // Kadro dolunca content/routes.ts'teki "/kadromuz" kaydından noIndex: true
 // kaldırılmalı — o bayrak sayfayı bugün sitemap'ten hariç tutuyor.
-//
-// export const staff: StaffMember[] = [
-//   { slug: "ayse-yilmaz", name: "Ayşe Yılmaz", branch: "Okul Müdürü", group: "yonetim" },
-//   { slug: "mehmet-demir", name: "Mehmet Demir", branch: "Matematik", group: "ortaokul" },
-//   { slug: "elif-kaya", name: "Elif Kaya", branch: "Sınıf Öğretmeni", group: "ilkokul" },
-// ];
-export const staff: StaffMember[] = [];
+export const staff: StaffMember[] = [
+  { slug: "esma-akdemir", name: "Esma Akdemir", branch: "Okul Müdürü", group: "yonetim" },
+  {
+    slug: "ayse-eski",
+    name: "Ayşe Eski",
+    branch: "Fen Bilimleri Öğretmeni",
+    group: "ortaokul",
+  },
+  {
+    slug: "fatmanur-akcay",
+    name: "Fatmanur Akçay",
+    branch: "Psikolojik Danışman / Rehber Öğretmen",
+    group: "ortaokul",
+  },
+  {
+    slug: "betul-terzi",
+    name: "Betül Terzi",
+    branch: "Yabancı Diller Bölüm Başkanı / İngilizce Öğretmeni",
+    group: "brans",
+  },
+  { slug: "oznur-irin", name: "Öznur İrin", branch: "Beden Eğitimi Öğretmeni", group: "brans" },
+];
 
 export type StaffGroupSection = { group: StaffGroup; members: StaffMember[] };
 

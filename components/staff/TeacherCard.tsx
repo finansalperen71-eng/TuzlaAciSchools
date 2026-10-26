@@ -7,12 +7,15 @@ import { InitialsPlate } from "./InitialsPlate";
 // Branşa göre değil kademeye göre eşlenir: branş listesi sürekli büyür ve
 // her yeni branş renksiz kalır (haritada yoksa yedek renk hash'e düşer,
 // bu da kademe içindeki kartların birbirinden habersiz renklenmesi demek).
-// Kademe sabit dörtlü, her biri sayfada zaten kendi başlığı altında.
+// Grup sabit beşli, her biri sayfada zaten kendi başlığı altında. Palette
+// dört aksan var; "brans" sky'ı ilkokul ile paylaşıyor (blog'da da dil
+// etiketleri sky) — iki bölüm ayrı başlıklar altında olduğu için karışmaz.
 const GROUP_ACCENT: Record<StaffGroup, Accent> = {
   yonetim: "lilac",
   anaokulu: "honey",
   ilkokul: "sky",
   ortaokul: "teal",
+  brans: "sky",
 };
 
 type TeacherCardProps = {
