@@ -6,6 +6,8 @@ type BuildMetadataInput = {
   description: string;
   path: string;
   noIndex?: boolean;
+  // Sosyal medya paylaşım görseli (ör. blog kapağı); site köküne göre yol.
+  image?: { src: string; alt: string };
 };
 
 export function buildMetadata({
@@ -13,8 +15,10 @@ export function buildMetadata({
   description,
   path,
   noIndex = false,
+  image,
 }: BuildMetadataInput): Metadata {
   const url = `${site.url}${path}`;
+  const images = image ? [{ url: `${site.url}${image.src}`, alt: image.alt }] : undefined;
 
   return {
     title,
@@ -32,11 +36,13 @@ export function buildMetadata({
       siteName: site.name,
       locale: "tr_TR",
       type: "website",
+      images,
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images,
     },
   };
 }

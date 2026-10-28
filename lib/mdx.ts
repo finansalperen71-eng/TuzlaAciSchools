@@ -12,6 +12,10 @@ export type PostFrontmatter = {
   date: string;
   tags: string[];
   order: number;
+  // Kapak dosyası konvansiyonla bulunur (aşağıya bkz.); burada yalnızca
+  // görselin anlatımı ve fotoğrafçı kredisi tutulur. İkisi de opsiyonel.
+  coverAlt?: string;
+  coverCredit?: { name: string; url: string };
 };
 
 // cover frontmatter'da tutulmuyor: dosya adı ile frontmatter birbirinden
