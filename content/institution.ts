@@ -85,6 +85,24 @@ export const staff: StaffMember[] = [
     group: "ortaokul",
   },
   {
+    slug: "fatima-guner",
+    name: "Fatıma Güner",
+    branch: "Din Kültürü ve Ahlak Bilgisi Öğretmeni",
+    group: "ortaokul",
+  },
+  {
+    slug: "aysenur-samsa",
+    name: "Ayşenur Samsa",
+    branch: "Matematik Öğretmeni",
+    group: "ortaokul",
+  },
+  {
+    slug: "elif-kahvecioglu",
+    name: "Elif Kahvecioğlu",
+    branch: "Matematik Öğretmeni",
+    group: "ortaokul",
+  },
+  {
     slug: "fatmanur-akcay",
     name: "Fatmanur Akçay",
     branch: "Psikolojik Danışman / Rehber Öğretmen",
