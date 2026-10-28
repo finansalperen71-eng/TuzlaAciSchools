@@ -30,8 +30,9 @@ const csp = [
   "img-src 'self' data: blob: https://www.googletagmanager.com https://www.google-analytics.com",
   "font-src 'self' data:",
   "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com",
-  // İletişim sayfasındaki Google Maps embed'i için.
-  "frame-src https://www.google.com",
+  // İletişim sayfasındaki Google Maps embed'i ve blog yazılarındaki YouTube
+  // videoları için (oynat'a basılınca youtube-nocookie.com'dan yüklenir).
+  "frame-src https://www.google.com https://www.youtube-nocookie.com",
   "media-src 'self'",
   "frame-ancestors 'none'",
   "base-uri 'self'",
@@ -58,6 +59,11 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   outputFileTracingRoot: path.join(__dirname),
   poweredByHeader: false,
+  images: {
+    // Blog yazılarındaki YouTube videolarının kapak görselleri. next/image
+    // üzerinden sunulduğu için ziyaretçinin tarayıcısı Google'a istek atmaz.
+    remotePatterns: [{ protocol: "https", hostname: "i.ytimg.com", pathname: "/vi/**" }],
+  },
   async headers() {
     return [
       { source: "/(.*)", headers: securityHeaders },

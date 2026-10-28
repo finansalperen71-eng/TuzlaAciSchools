@@ -1,5 +1,7 @@
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import { YouTube } from "@/components/blog/YouTube";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { Container } from "@/components/ui/Container";
 import { getBreadcrumbTrail } from "@/content/routes";
@@ -29,8 +31,12 @@ export async function generateMetadata({ params }: PageParams) {
     title: post.title,
     description: post.description,
     path: `/blog/${post.slug}`,
+    image: post.cover ? { src: post.cover, alt: post.coverAlt ?? post.title } : undefined,
   });
 }
+
+// MDX içinde kullanılabilen bileşenler, ör. <YouTube id="..." title="..." />
+const mdxComponents = { YouTube };
 
 export default async function BlogPostPage({ params }: PageParams) {
   const { slug } = await params;
@@ -65,6 +71,33 @@ export default async function BlogPostPage({ params }: PageParams) {
               ))}
             </div>
           ) : null}
+          {post.cover ? (
+            <figure className="mt-4 flex flex-col gap-2">
+              <div className="relative aspect-[16/9] overflow-hidden rounded-card border border-line bg-line/40 shadow-card">
+                <Image
+                  src={post.cover}
+                  alt={post.coverAlt ?? ""}
+                  fill
+                  priority
+                  sizes="(min-width: 768px) 768px, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              {post.coverCredit ? (
+                <figcaption className="font-mono text-xs text-slate">
+                  Fotoğraf:{" "}
+                  <a
+                    href={post.coverCredit.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-signal-deep"
+                  >
+                    {post.coverCredit.name} / Unsplash
+                  </a>
+                </figcaption>
+              ) : null}
+            </figure>
+          ) : null}
         </Container>
       </section>
 
@@ -76,7 +109,7 @@ export default async function BlogPostPage({ params }: PageParams) {
               [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6
               [&_a]:text-signal-deep [&_a]:underline [&_a]:underline-offset-2"
           >
-            <MDXRemote source={post.content} />
+            <MDXRemote source={post.content} components={mdxComponents} />
           </div>
         </Container>
       </section>
