@@ -49,9 +49,39 @@ export type StaffMember = {
 export const staff: StaffMember[] = [
   { slug: "esma-akdemir", name: "Esma Akdemir", branch: "Okul Müdürü", group: "yonetim" },
   {
+    slug: "sevilay-pala-arslan",
+    name: "Sevilay Pala Arslan",
+    branch: "İlkokul Öğretmeni",
+    group: "ilkokul",
+  },
+  {
+    slug: "muhammed-kusci",
+    name: "Muhammed Kuşçi",
+    branch: "İlkokul Öğretmeni",
+    group: "ilkokul",
+  },
+  {
+    slug: "selin-uyar-halici",
+    name: "Selin Uyar Halıcı",
+    branch: "Psikolojik Danışman / Rehber Öğretmen (Anaokulu-İlkokul)",
+    group: "ilkokul",
+  },
+  {
     slug: "ayse-eski",
     name: "Ayşe Eski",
     branch: "Fen Bilimleri Öğretmeni",
+    group: "ortaokul",
+  },
+  {
+    slug: "omer-aslan",
+    name: "Ömer Aslan",
+    branch: "Sosyal Bilgiler ve İnkılap Tarihi Öğretmeni",
+    group: "ortaokul",
+  },
+  {
+    slug: "seden-filiz",
+    name: "Seden Filiz",
+    branch: "Türkçe Öğretmeni",
     group: "ortaokul",
   },
   {
