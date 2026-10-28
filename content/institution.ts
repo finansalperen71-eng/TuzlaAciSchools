@@ -114,6 +114,12 @@ export const staff: StaffMember[] = [
     branch: "Yabancı Diller Bölüm Başkanı / İngilizce Öğretmeni",
     group: "brans",
   },
+  {
+    slug: "merve-yasar",
+    name: "Merve Yaşar",
+    branch: "İngilizce Öğretmeni",
+    group: "brans",
+  },
   { slug: "oznur-irin", name: "Öznur İrin", branch: "Beden Eğitimi Öğretmeni", group: "brans" },
 ];
 
