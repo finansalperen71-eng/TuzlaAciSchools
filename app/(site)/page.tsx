@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { HeroCurtain } from "@/components/home/HeroCurtain";
+import { StaffWall } from "@/components/home/StaffWall";
 import { PostCard } from "@/components/blog/PostCard";
 import { achievementStats } from "@/content/achievements";
 import { levels } from "@/content/levels";
@@ -96,6 +97,8 @@ export default function HomePage() {
           </div>
         </Container>
       </section>
+
+      <StaffWall />
 
       <section className="border-b border-line bg-ink text-chalk">
         <Container className="py-20 md:py-24">
