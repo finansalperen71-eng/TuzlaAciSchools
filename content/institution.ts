@@ -48,6 +48,9 @@ export type StaffMember = {
 // kaldırılmalı — o bayrak sayfayı bugün sitemap'ten hariç tutuyor.
 export const staff: StaffMember[] = [
   { slug: "esma-akdemir", name: "Esma Akdemir", branch: "Okul Müdürü", group: "yonetim" },
+  { slug: "esra-yilmaz", name: "Esra Yılmaz", branch: "Anaokulu Öğretmeni", group: "anaokulu" },
+  { slug: "feza-bektas", name: "Feza Bektaş", branch: "Anaokulu Öğretmeni", group: "anaokulu" },
+  { slug: "busra-gezer", name: "Büşra Gezer", branch: "Anaokulu Öğretmeni", group: "anaokulu" },
   {
     slug: "sevilay-pala-arslan",
     name: "Sevilay Pala Arslan",
@@ -60,6 +63,7 @@ export const staff: StaffMember[] = [
     branch: "İlkokul Öğretmeni",
     group: "ilkokul",
   },
+  { slug: "canan-ayaz", name: "Canan Ayaz", branch: "İlkokul Öğretmeni", group: "ilkokul" },
   {
     slug: "selin-uyar-halici",
     name: "Selin Uyar Halıcı",
@@ -120,6 +124,13 @@ export const staff: StaffMember[] = [
     branch: "İngilizce Öğretmeni",
     group: "brans",
   },
+  {
+    slug: "kubra-kocyigit",
+    name: "Kübra Koçyiğit",
+    branch: "İngilizce Öğretmeni",
+    group: "brans",
+  },
+  { slug: "burak-akyon", name: "Burak Akyön", branch: "İngilizce Öğretmeni", group: "brans" },
   { slug: "oznur-irin", name: "Öznur İrin", branch: "Beden Eğitimi Öğretmeni", group: "brans" },
 ];
 
