@@ -65,6 +65,12 @@ export const staff: StaffMember[] = [
   },
   { slug: "canan-ayaz", name: "Canan Ayaz", branch: "İlkokul Öğretmeni", group: "ilkokul" },
   {
+    slug: "leyla-kisaoglu",
+    name: "Leyla Kısaoğlu",
+    branch: "İlkokul Öğretmeni",
+    group: "ilkokul",
+  },
+  {
     slug: "selin-uyar-halici",
     name: "Selin Uyar Halıcı",
     branch: "Psikolojik Danışman / Rehber Öğretmen (Anaokulu-İlkokul)",
